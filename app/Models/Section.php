@@ -21,4 +21,12 @@ class Section extends Model
     {
         return $this->belongsTo(Program::class);
     }
+    public function sections()
+{
+    return $this->hasMany(Section::class);
+}
+public function gradeLevel()
+{
+    return $this->belongsTo(GradeLevel::class);
+}
 }

@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Sections\Tables;
+namespace App\Filament\Resources\GradeLevels\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SectionsTable
+class GradeLevelsTable
 {
     public static function configure(Table $table): Table
     {
@@ -20,11 +19,9 @@ class SectionsTable
                     ->searchable(),
                 TextColumn::make('code')
                     ->searchable(),
-                TextColumn::make('name')
+                TextColumn::make('order')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('grade_level')
-                    ->searchable(),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
@@ -40,7 +37,6 @@ class SectionsTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

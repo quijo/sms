@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Sections\Schemas;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 
 class SectionForm
@@ -16,9 +17,12 @@ class SectionForm
                     ->required(),
                 TextInput::make('code')
                     ->default(null),
-                TextInput::make('program_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('program_id')
+    ->relationship('program', 'name')
+    ->required()
+    ->searchable()
+    ->preload(),
+                   
                 TextInput::make('grade_level')
                     ->default(null),
                 Toggle::make('is_active')
