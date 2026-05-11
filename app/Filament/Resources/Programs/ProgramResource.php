@@ -23,7 +23,7 @@ class ProgramResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'title';
-
+protected static string | \UnitEnum | null $navigationGroup = 'Academic';
     public static function form(Schema $schema): Schema
     {
         return ProgramForm::configure($schema);

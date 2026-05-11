@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
          $this->call([
         GradeLevelSeeder::class,
+        SubjectSeeder::class,
     ]);
     }
 }

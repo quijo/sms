@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Filament\Resources\GradeLevels;
-
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\GradeLevels\Pages\CreateGradeLevel;
 use App\Filament\Resources\GradeLevels\Pages\EditGradeLevel;
 use App\Filament\Resources\GradeLevels\Pages\ListGradeLevels;
@@ -11,8 +13,12 @@ use App\Models\GradeLevel;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+
+
+
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+
 
 class GradeLevelResource extends Resource
 {
@@ -21,7 +27,7 @@ class GradeLevelResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'Level';
-
+protected static string | \UnitEnum | null $navigationGroup = 'Academic';
     public static function form(Schema $schema): Schema
     {
         return GradeLevelForm::configure($schema);
@@ -45,13 +51,30 @@ class GradeLevelResource extends Resource
 //         'principal',
 //     ]);
 // }
+public static function infolist(Schema $schema): Schema
+{
+    return $schema->schema([
+        Section::make('Grade Level')
+            ->schema([
+                TextEntry::make('name'),
+            ]),
 
+        Section::make('Subjects')
+            ->schema([
+                TextEntry::make('subjects')
+                    ->formatStateUsing(fn ($record) =>
+                        $record->subjects->pluck('name')->join(', ')
+                    ),
+            ]),
+    ]);
+}
     public static function getPages(): array
     {
         return [
             'index' => ListGradeLevels::route('/'),
             'create' => CreateGradeLevel::route('/create'),
             'edit' => EditGradeLevel::route('/{record}/edit'),
+            'view' => Pages\ViewGradeLevel::route('/{record}'),
         ];
     }
 }

@@ -1,43 +1,31 @@
 <?php
 
-namespace App\Filament\Resources\Sections\Tables;
+namespace App\Filament\Resources\Subjects\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SectionsTable
+class SubjectsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-
                 TextColumn::make('code')
-                    ->searchable()
-                    ->sortable(),
-
-                // FIXED: relationship column
-                TextColumn::make('gradeLevel.name')
-                    ->label('Grade Level')
-                    ->searchable()
-                    ->sortable(),
-
-                IconColumn::make('is_active')
-                    ->boolean(),
-
+                    ->searchable(),
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('description')
+                    ->searchable(),
+                TextColumn::make('level')
+                    ->badge(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -47,7 +35,6 @@ class SectionsTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

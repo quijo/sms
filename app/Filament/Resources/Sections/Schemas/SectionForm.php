@@ -18,13 +18,15 @@ class SectionForm
                 TextInput::make('code')
                     ->default(null),
                 Select::make('program_id')
-    ->relationship('program', 'name')
-    ->required()
-    ->searchable()
-    ->preload(),
-                   
-                TextInput::make('grade_level')
-                    ->default(null),
+                    ->relationship('program', 'name')
+                    ->required()
+                    ->searchable()
+                    ->preload(),
+                Select::make('grade_level_id')
+                    ->relationship('gradeLevel', 'name')
+                    ->required()
+                    ->searchable()
+                    ->preload(),
                 Toggle::make('is_active')
                     ->required(),
             ]);
