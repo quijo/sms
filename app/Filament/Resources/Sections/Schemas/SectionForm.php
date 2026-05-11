@@ -27,8 +27,15 @@ class SectionForm
                     ->required()
                     ->searchable()
                     ->preload(),
-                Toggle::make('is_active')
-                    ->required(),
+               Select::make('adviser_id')
+    ->label('Class Adviser')
+    ->relationship('adviser', 'first_name')
+    ->getOptionLabelFromRecordUsing(fn ($record) =>
+        $record->first_name . ' ' . $record->last_name
+    )
+    ->searchable()
+    ->preload()
+    ->nullable(),
             ]);
     }
 }

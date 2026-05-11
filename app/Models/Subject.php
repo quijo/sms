@@ -29,4 +29,9 @@ public function gradeLevel()
 {
     return $this->belongsTo(GradeLevel::class);
 }
+public function teachingLoads()
+{
+    return $this->hasMany(TeachingLoad::class);
+}
+
 }

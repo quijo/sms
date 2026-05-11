@@ -1,48 +1,37 @@
 <?php
 
-namespace App\Filament\Resources\Sections\Tables;
+namespace App\Filament\Resources\Teachers\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SectionsTable
+class TeachersTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->searchable()
+                TextColumn::make('user_id')
+                    ->numeric()
                     ->sortable(),
-                
-                    TextColumn::make('adviser.full_name')
-    ->label('Adviser')
-    ->sortable()
-    ->searchable(),
-
-                TextColumn::make('code')
-                    ->searchable()
-                    ->sortable(),
-
-                // FIXED: relationship column
-                TextColumn::make('gradeLevel.name')
-                    ->label('Grade Level')
-                    ->searchable()
-                    ->sortable(),
-
-                IconColumn::make('is_active')
-                    ->boolean(),
-
+                TextColumn::make('employee_id')
+                    ->searchable(),
+                TextColumn::make('first_name')
+                    ->searchable(),
+                TextColumn::make('last_name')
+                    ->searchable(),
+                TextColumn::make('email')
+                    ->label('Email address')
+                    ->searchable(),
+                TextColumn::make('phone')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -52,7 +41,6 @@ class SectionsTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

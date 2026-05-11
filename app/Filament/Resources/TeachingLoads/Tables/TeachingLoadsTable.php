@@ -1,48 +1,37 @@
 <?php
 
-namespace App\Filament\Resources\Sections\Tables;
+namespace App\Filament\Resources\TeachingLoads\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SectionsTable
+class TeachingLoadsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                
-                    TextColumn::make('adviser.full_name')
-    ->label('Adviser')
+                TextColumn::make('teacher.first_name')
+    ->label('Teacher')
     ->sortable()
     ->searchable(),
 
-                TextColumn::make('code')
-                    ->searchable()
-                    ->sortable(),
+TextColumn::make('subject.name')
+    ->label('Subject')
+    ->sortable()
+    ->searchable(),
 
-                // FIXED: relationship column
-                TextColumn::make('gradeLevel.name')
-                    ->label('Grade Level')
-                    ->searchable()
-                    ->sortable(),
-
-                IconColumn::make('is_active')
-                    ->boolean(),
-
+TextColumn::make('section.name')
+    ->label('Section')
+    ->sortable()
+    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -52,7 +41,6 @@ class SectionsTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

@@ -29,4 +29,8 @@ public function gradeLevel()
 {
     return $this->belongsTo(GradeLevel::class);
 }
+public function adviser()
+{
+    return $this->belongsTo(Teacher::class, 'adviser_id');
+}
 }
